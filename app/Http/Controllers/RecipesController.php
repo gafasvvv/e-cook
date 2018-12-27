@@ -50,16 +50,20 @@ class RecipesController extends Controller
         ]);
         
         $ingredients = collect();
+        
         foreach ($request ->ingredients as $ingredientAttrs) {
-          if (empty($ingredientAttr['ingredient']) || empty($ingredientAttr['quantity'])) {
+          if (empty($ingredientAttrs['ingredient']) || empty($ingredientAttrs['quantity'])) {
               continue;
           }
-          $ingredient = $recipe->ingredients()->create($ingredientAttrs);
           
+          $ingredient = $recipe->ingredients()->create($ingredientAttrs);
+         
           $ingredients->push($ingredient);
+          
         }
-       
+        
         $how_to = collect();
+        
         foreach($request->how_to as $howToMakeAttrs){
             if(empty($howToMakeAttrs['how_to_make'])){
                 continue;
@@ -67,7 +71,7 @@ class RecipesController extends Controller
             $how_to_make = $recipe->how_to()->create($howToMakeAttrs);
             
             $how_to->push($how_to_make);
-            
+           
         }
          
         return back();
@@ -76,7 +80,11 @@ class RecipesController extends Controller
     // getでrecipes/idにアクセスされた場合の「取得表示処理」
     public function show($id)
     {
-        //
+        $recipe = Recipe::find($id);
+        
+        return view('recipes.show',[
+            'recipe' => $recipe    
+        ]);
     }
     
     // getでrecipes/id/editにアクセスされた場合の「更新画面表示処理」
@@ -94,12 +102,12 @@ class RecipesController extends Controller
     // deleteでrecipes/idにアクセスされた場合の「削除処理」
     public function destroy($id)
     {
-        $recipe = \App\Recipe::find($id);
+    //     $recipe = \App\Recipe::find($id);
         
-        if(\Auth::id() === $recipe->user_id){
-            $recipe->delete();
-        }
+    //     if(\Auth::id() === $recipe->user_id){
+    //         $recipe->delete();
+    //     }
         
-        return back();
+    //     return back();
     }
 }
