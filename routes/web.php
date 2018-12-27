@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//トップページの表示
+Route::get('/', 'RecipesController@index');
 
 //ユーザー登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -27,4 +26,5 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 //ユーザー機能
 Route::group(['middleware' => ['auth']], function(){
     Route::resource('users', 'UsersController', ['only' => ['show']]);
+    Route::resource('recipes', 'RecipesController');
 });
