@@ -22,6 +22,12 @@
         <div class="row">
             <div class="col-4">
                 <img src="https://placehold.jp/200x200.png"></img>
+                <form>
+                  <div class="form-group">
+                    <label for="File"></label>
+                    <input type="file" class="form-control-file" id="File">
+                  </div>
+                </form>
             </div>
             <div class="col-8">
                 <h3>材料(2人分)</h3>
@@ -56,7 +62,7 @@
             <?php
                 for($i = 0; $i <=7; $i++){
             ?>
-            <div class="col-md-3">
+            <div class="col-md-3 mb-3">
                 {!! Form::label('how_to_make', $i+1) !!}
                 {!! Form::textarea("how_to[$i][how_to_make]", null, ['class'=> 'form-control']) !!}
             </div>
@@ -65,8 +71,8 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-6">
-                {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
+            <div class="mx-auto mt-3 mb-3">
+                {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-lg']) !!}
             {!! Form::close() !!}
             </div>
         </div>

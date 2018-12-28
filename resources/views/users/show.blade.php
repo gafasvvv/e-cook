@@ -14,10 +14,9 @@
         </aside>
         <div class="col-sm-9">
             <ul class="nav nav-tabs nav-justified mb-3">
-                <li class="nav-item"><a href="#" class-"nav-link">新着レシピ</a></li>
-                <li class="nav-item"><a href="#" class-"nav-link">いいね</a></li>
                 <li class="nav-item"><a href="{{ route('users.show', ['id' => $user->id]) }}" 
                 class-"nav-link {{ Request::is('users/' . $user->id) ? 'active' : ''}}">個人レシピ</a></li>
+                <li class="nav-item"><a href="#" class-"nav-link">いいね</a></li>
             </ul>
             @if (count($recipes) > 0)
                 @include('recipes.recipes', ['recipes'=> $recipes])

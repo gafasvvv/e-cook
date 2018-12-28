@@ -11,17 +11,11 @@ class RecipesController extends Controller
     //getでrecipes/にアクセスされた場合の「一覧表示処理」
     public function index()
     {
-        $data = [];
-        if(\Auth::check()){
-            $user = \Auth::user();
-            $recipes = $user->recipes()->orderBy('created_at', 'desc')->paginate(10);
-            
-            $data = [
-                'user' => $user,
-                'recipes' => $recipes,
-            ];
-        }
-        return view('welcome', $data);
+        $recipes = Recipe::paginate(20);
+    
+        return view('welcome', [
+            'recipes' => $recipes,    
+        ]);
     }
     //getでresipes/createにアクセスされた場合の「新規登録画面表示処理」
     public function create()
@@ -56,7 +50,7 @@ class RecipesController extends Controller
               continue;
           }
           
-          $ingredient = $recipe->ingredients()->create($ingredientAttrs);
+          $ingredient = $recipe->ingredient()->create($ingredientAttrs);
          
           $ingredients->push($ingredient);
           
@@ -81,33 +75,46 @@ class RecipesController extends Controller
     public function show($id)
     {
         $recipe = Recipe::find($id);
-        
+        $ingredient = Recipe::find($id)->ingredient;
+        $how_to = Recipe::find($id)->how_to;
+       
         return view('recipes.show',[
-            'recipe' => $recipe    
+            'recipe' => $recipe,
+            'ingredients' => $ingredient,
+            'how_tos' => $how_to,
         ]);
     }
     
     // getでrecipes/id/editにアクセスされた場合の「更新画面表示処理」
     public function edit($id)
     {
-        //
+        $recipe = Recipe::find($id);
+        
+        return view('recipes.edit',[
+            'recipe' => $recipe
+        ]);
     }
     
     // putまたはpatchでrecipes/idにアクセスされた場合の「更新処理」
     public function update(Request $request, $id)
     {
-        //
+        $recipe = Recipe::find($id);
+        $recipe->name = $recipe->name;
+        $recipe->content = $recipe->content;
+        $recipe->ingredient = $recipe->ingredient;
+        $recipe->quantity = $recipe->quantity;
+        $recipe->how_to_make = $recipe->how_to_make;
+        $recipe->save();
+        
+        return back();
     }
     
     // deleteでrecipes/idにアクセスされた場合の「削除処理」
     public function destroy($id)
     {
-    //     $recipe = \App\Recipe::find($id);
+        $recipe = Recipe::find($id);
+        $recipe->delete();
         
-    //     if(\Auth::id() === $recipe->user_id){
-    //         $recipe->delete();
-    //     }
-        
-    //     return back();
+        return back();
     }
 }
