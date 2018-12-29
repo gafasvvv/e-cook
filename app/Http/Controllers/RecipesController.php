@@ -68,7 +68,7 @@ class RecipesController extends Controller
            
         }
          
-        return back();
+        return redirect('/');
     }
     
     // getでrecipes/idにアクセスされた場合の「取得表示処理」
@@ -89,9 +89,13 @@ class RecipesController extends Controller
     public function edit($id)
     {
         $recipe = Recipe::find($id);
+        $ingredient = Recipe::find($id)->ingredient;
+        $how_to = Recipe::find($id)->how_to;
         
         return view('recipes.edit',[
-            'recipe' => $recipe
+            'recipe' => $recipe,
+            'ingredients' => $ingredient,
+            'how_tos' => $how_to,
         ]);
     }
     
@@ -99,22 +103,32 @@ class RecipesController extends Controller
     public function update(Request $request, $id)
     {
         $recipe = Recipe::find($id);
-        $recipe->name = $recipe->name;
-        $recipe->content = $recipe->content;
-        $recipe->ingredient = $recipe->ingredient;
-        $recipe->quantity = $recipe->quantity;
-        $recipe->how_to_make = $recipe->how_to_make;
+        // $ingredient = Recipe::find($id)->ingredient;
+        // $how_to = Recipe::find($id)->how_to;
+        
+        $recipe->name = $request->name;
+        $recipe->content = $request->content;
         $recipe->save();
         
-        return back();
+        // $ingredient->ingredient = $request->ingredient;
+        // $ingredient->quantity = $request->quantity;
+        // $ingredient->save();
+        
+        // $how_to->how_to_make = $request->how_to_make;
+        // $how_to->save();
+        
+        return redirect('/');
     }
     
     // deleteでrecipes/idにアクセスされた場合の「削除処理」
     public function destroy($id)
     {
         $recipe = Recipe::find($id);
-        $recipe->delete();
+
+        if(\Auth::id() === $recipe->user_id){
+            $recipe->delete();
+        }
         
-        return back();
+        return redirect('/');
     }
 }

@@ -21,7 +21,7 @@ class CreateIngredientsTable extends Migration
             $table->timestamps();
             
             // 外部キー制約
-            $table->foreign('recipe_id')->references('id')->on('recipes');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
         });
     }
 

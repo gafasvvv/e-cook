@@ -22,12 +22,6 @@
         <div class="row">
             <div class="col-4">
                 <img src="https://placehold.jp/200x200.png"></img>
-                <form>
-                  <div class="form-group">
-                    <label for="File"></label>
-                    <input type="file" class="form-control-file" id="File">
-                  </div>
-                </form>
             </div>
             <div class="col-8">
                 <h3>材料(2人分)</h3>
@@ -72,7 +66,7 @@
     <div class="container">
         <div class="row">
             <div class="mx-auto mt-3 mb-3">
-                {!! Form::submit('投稿', ['class' => 'btn btn-primary btn-lg']) !!}
+                {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
             </div>
         </div>

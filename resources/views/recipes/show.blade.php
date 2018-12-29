@@ -57,9 +57,9 @@
         </div>
         <div class="row">
             <div class="mx-auto mb-3">
-            {{-- {!! Form::model($recipe, ['route' => 'recipes.destroy', $recipe->id], 'method'=> 'delete']) !!} --}}
+            {!! Form::model($recipe, ['route' => ['recipes.destroy', $recipe->id], 'method'=> 'delete']) !!} 
                 {!! Form::submit('削除', ['class' => 'btn btn-danger btn-lg']) !!}
-            {{--{!! Form::close() !!}--}}
+            {!! Form::close() !!}
             </div>
         </div>
     </div>

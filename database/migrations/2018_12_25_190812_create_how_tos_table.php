@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHowToTable extends Migration
+class CreateHowTosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,7 @@ class CreateHowToTable extends Migration
             $table->timestamps();
             
             // 外部キー制約
-            $table->foreign('recipe_id')->references('id')->on('recipes');
+            $table->foreign('recipe_id')->references('id')->on('recipes')->onDelete('cascade');
         });
     }
 
@@ -30,7 +30,7 @@ class CreateHowToTable extends Migration
      * @return void
      */
     public function down()
-    {
-        Schema::dropIfExists('how_to');
+    {   
+        Schema::dropIfExists('how_tos');
     }
 }
