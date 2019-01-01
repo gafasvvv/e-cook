@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Recipe; 
+use App\Recipe;
+use App\User;
 
 class RecipesController extends Controller
 {
     //getでrecipes/にアクセスされた場合の「一覧表示処理」
     public function index()
     {
-        $recipes = Recipe::paginate(20);
+        $recipes = Recipe::paginate(8);
+        $user = new User;
     
         return view('welcome', [
-            'recipes' => $recipes,    
+            'recipes' => $recipes,
+            'user' => $user,
         ]);
     }
     //getでresipes/createにアクセスされた場合の「新規登録画面表示処理」
@@ -31,11 +34,11 @@ class RecipesController extends Controller
     public function store(Request $request)
     {
         // $this->validate($request,[
-        //     'name' => 'required|max:191',
-        //     'content' => 'required|max:191',
-        //     'ingredients.*.quantity' => 'required|max:191',
-        //     'quantity' => 'required|max:191',
-        //     'how_to_make' => 'required|max:191',
+        //      'name' => 'required|max:191',
+        //      'content' => 'required|max:191',
+        //      'ingredient' => 'required|max:191',
+        //      'quantity' => 'required|max:191',
+        //      'how_to_make' => 'required|max:191',
         // ]);
         
         $recipe = $request->user()->recipes()->create([
@@ -95,7 +98,7 @@ class RecipesController extends Controller
         return view('recipes.edit',[
             'recipe' => $recipe,
             'ingredients' => $ingredient,
-            'how_tos' => $how_to,
+            'how_to' => $how_to,
         ]);
     }
     
@@ -103,19 +106,13 @@ class RecipesController extends Controller
     public function update(Request $request, $id)
     {
         $recipe = Recipe::find($id);
-        // $ingredient = Recipe::find($id)->ingredient;
-        // $how_to = Recipe::find($id)->how_to;
-        
+       
         $recipe->name = $request->name;
         $recipe->content = $request->content;
+        $recipe->ingredient->ingredient = $request->ingredient;
+        $recipe->how_to->how_to_make = $request->how_to_make;
+        
         $recipe->save();
-        
-        // $ingredient->ingredient = $request->ingredient;
-        // $ingredient->quantity = $request->quantity;
-        // $ingredient->save();
-        
-        // $how_to->how_to_make = $request->how_to_make;
-        // $how_to->save();
         
         return redirect('/');
     }
@@ -129,6 +126,6 @@ class RecipesController extends Controller
             $recipe->delete();
         }
         
-        return redirect('/');
+        return back();
     }
 }

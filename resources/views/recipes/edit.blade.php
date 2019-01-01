@@ -66,7 +66,7 @@
     <div class="container">
         <div class="row">
             <div class="mx-auto mt-3 mb-3">
-                {!! Form::submit('更新', ['class' => 'btn btn-dark btn-lg']) !!}
+                {!! Form::submit('更新', ['class' => 'btn btn-dark btn-block']) !!}
             {!! Form::close() !!}
             </div>
         </div>

@@ -22,4 +22,10 @@ class Recipe extends Model
     {
         return $this->hasMany(HowTo::class);
     }
+    
+    public function favorite_users()
+    {
+        return $this->belongsToMany(User::class, 'user_recipe', 'recipe_id', 'user_id')
+                    ->withTimestamps();
+    }
 }

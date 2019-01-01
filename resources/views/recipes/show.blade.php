@@ -52,7 +52,7 @@
     <div class="container">
         <div class="row">
             <div class="mx-auto mt-3 mb-3">
-            {!! link_to_route('recipes.edit', '編集', ['id' => $recipe->id], ['class' => 'btn btn-primary btn-lg']) !!}
+            {!! link_to_route('recipes.edit', '編集', ['id' => $recipe->id], ['class' => 'btn btn-info btn-lg']) !!}
             </div>
         </div>
         <div class="row">

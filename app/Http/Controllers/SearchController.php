@@ -2,23 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use App\Recipe;
+
 
 class SearchController extends Controller
 {
-    public function getIndex()
+    public function index(Request $request)
     {
-        //検索するテキスト取得
-        $search = Request::get('s');
-        $query = Recipe::query();
+        $recipe = new Recipe();
         
-        //検索するテキストが入力されている場合のみ
-         if(!empty($search)){
-             $query->where('name', 'like', '%'.$search.'%');
-         }
-         
-         $data = Recipe::get();
-         return view('search.index', compact('data'));
+        if($request->has('name')){
+            $recipe = $recipe
+                    ->orWhere('name', 'LIKE', '%'.$request->input('name').'%');
+        }
+        
+        // if($request->has('ingredient')){
+        //     $recipe = $recipe
+        //             ->join('ingredients','recipes.id', '=', 'ingredients.recipe_id')
+        //             ->orWhere('ingredient', 'LIKE', '%'.$request->input('ingredient').'%');
+        // }
+        
+        $pagedRecipes = $recipe->paginate(8)
+                        ->appends($request->only(['name', 'ingredient']));
+                        
+        return view('search/index')
+                ->with('name', $request->input('name'))
+                ->with('ingredient', $request->input('ingredient'))
+                ->with('recipes', $pagedRecipes);
     }
 }
