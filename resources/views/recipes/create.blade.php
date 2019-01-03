@@ -66,7 +66,7 @@
     <div class="container">
         <div class="row">
             <div class="mx-auto mt-3 mb-3">
-                {!! Form::submit('投稿', ['class' => 'btn btn-info btn-lg']) !!}
+                {!! Form::submit('投稿', ['class' => 'btn btn-outline-info btn-lg']) !!}
             {!! Form::close() !!}
             </div>
         </div>

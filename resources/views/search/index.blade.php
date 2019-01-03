@@ -10,7 +10,7 @@
             <input type="submit" value="検索">
             </form>
         </div>
-        <div class="col-md-3 offset-3 mb-4">
+        <div class="col-md-3 offset-1 mb-4">
             <form>
             <input type="text" name="ingredient" value="{{ $ingredient }}" placeholder="材料名で検索">
             <input type="submit" value="検索">
@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="container">
-    <h2 class="mb-4">検索結果一覧</h2>
+    <h2 class="mb-4 text-center">検索結果一覧</h2>
     <div class="row">
         @foreach($recipes as $recipe)
         <div class="col-md-3">

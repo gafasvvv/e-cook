@@ -14,11 +14,11 @@
                         @if (Auth::id() == $recipe->user_id)
                         <div class="row">
                             <div class="col-6">
-                            {!! link_to_route('recipes.edit', '編集', ['id' => $recipe->id], ['class' => 'btn btn-info btn-block']) !!}
+                            {!! link_to_route('recipes.edit', '編集', ['id' => $recipe->id], ['class' => 'btn btn-outline-info btn-block']) !!}
                             </div>
                             <div class="col-6">
                             {!! Form::model($recipe, ['route' => ['recipes.destroy', $recipe->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('削除', ['class' => 'btn btn-danger btn-block']) !!}
+                                {!! Form::submit('削除', ['class' => 'btn btn-outline-danger btn-block']) !!}
                             {!! Form::close() !!}
                             </div>
                         </div>

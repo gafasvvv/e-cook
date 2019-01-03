@@ -38,9 +38,11 @@
         <div class="col-md-8">
             <ul class="nav nav-tabs nav-justified mb-3">
                 <li class="nav-item"><a href="{{ route('users.show', ['id' => $user->id]) }}" 
-                class-"nav-link {{ Request::is('users/' . $user->id) ? 'active' : ''}}">個人レシピ</a></li>
+                class-"nav-link {{ Request::is('users/' . $user->id) ? 'active' : ''}}">個人レシピ
+                <span class="badge badge-secondary ml-2 mb-2 mr-2">{{ $count_recipes }}</span></a></li>
                 <li class="nav-item"><a href="{{ route('users.favorites', ['id' => $user->id]) }}" 
-                class-"nav-link {{ Request::is('users/*/favorites') ? 'active' : ''}}">お気に入り</a></li>
+                class-"nav-link {{ Request::is('users/*/favorites') ? 'active' : ''}}">お気に入り
+                <span class="badge badge-secondary ml-2 mb-2 mr-2">{{ $count_favorites }}</span></a></li>
             </ul>
             @if (count($recipes) > 0)
                 @include('users.recipes', ['recipes'=> $recipes])

@@ -12,7 +12,7 @@ class RecipesController extends Controller
     //getでrecipes/にアクセスされた場合の「一覧表示処理」
     public function index()
     {
-        $recipes = Recipe::paginate(8);
+        $recipes = Recipe::paginate(16);
         $user = new User;
     
         return view('welcome', [

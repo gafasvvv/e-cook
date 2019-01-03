@@ -19,6 +19,8 @@ class UsersController extends Controller
             'recipes' =>$recipes,
         ];
         
+        $data += $this->counts($user);
+        
         return view('users.show', $data);
     }
     
