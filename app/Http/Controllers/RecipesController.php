@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Recipe;
 use App\User;
@@ -20,6 +21,7 @@ class RecipesController extends Controller
             'user' => $user,
         ]);
     }
+    
     //getでresipes/createにアクセスされた場合の「新規登録画面表示処理」
     public function create()
     {
@@ -33,6 +35,7 @@ class RecipesController extends Controller
     // postでrecipes/にアクセスされた場合の「新規登録処理」
     public function store(Request $request)
     {
+        
         // $this->validate($request,[
         //      'name' => 'required|max:191',
         //      'content' => 'required|max:191',
@@ -47,44 +50,42 @@ class RecipesController extends Controller
         ]);
         
         $ingredients = collect();
-        
         foreach ($request ->ingredients as $ingredientAttrs) {
           if (empty($ingredientAttrs['ingredient']) || empty($ingredientAttrs['quantity'])) {
               continue;
           }
           
-          $ingredient = $recipe->ingredient()->create($ingredientAttrs);
+          $ingredient = $recipe->ingredients()->create($ingredientAttrs);
          
           $ingredients->push($ingredient);
           
         }
         
-        $how_to = collect();
+        $how_tos = collect();
         
-        foreach($request->how_to as $howToMakeAttrs){
+        foreach($request->how_tos as $howToMakeAttrs){
             if(empty($howToMakeAttrs['how_to_make'])){
                 continue;
             }
-            $how_to_make = $recipe->how_to()->create($howToMakeAttrs);
+            $how_to_make = $recipe->how_tos()->create($howToMakeAttrs);
             
-            $how_to->push($how_to_make);
+            $how_tos->push($how_to_make);
            
         }
-         
-        return redirect('/');
+        
     }
     
     // getでrecipes/idにアクセスされた場合の「取得表示処理」
     public function show($id)
     {
         $recipe = Recipe::find($id);
-        $ingredient = Recipe::find($id)->ingredient;
-        $how_to = Recipe::find($id)->how_to;
-       
+        $ingredients = Recipe::find($id)->ingredients;
+        $how_tos = Recipe::find($id)->how_tos;
+        
         return view('recipes.show',[
             'recipe' => $recipe,
-            'ingredients' => $ingredient,
-            'how_tos' => $how_to,
+            'ingredients' => $ingredients,
+            'how_tos' => $how_tos,
         ]);
     }
     
@@ -92,13 +93,12 @@ class RecipesController extends Controller
     public function edit($id)
     {
         $recipe = Recipe::find($id);
-        $ingredient = Recipe::find($id)->ingredient;
-        $how_to = Recipe::find($id)->how_to;
-        
+        $ingredients = Recipe::find($id)->ingredients;
+        $how_tos = Recipe::find($id)->how_tos;
         return view('recipes.edit',[
             'recipe' => $recipe,
-            'ingredients' => $ingredient,
-            'how_to' => $how_to,
+            'ingredients' => $ingredients,
+            'how_tos' => $how_tos,
         ]);
     }
     
@@ -106,13 +106,51 @@ class RecipesController extends Controller
     public function update(Request $request, $id)
     {
         $recipe = Recipe::find($id);
-       
+        
+        //料理名とひとことを更新
         $recipe->name = $request->name;
         $recipe->content = $request->content;
-        $recipe->ingredient->ingredient = $request->ingredient;
-        $recipe->how_to->how_to_make = $request->how_to_make;
-        
         $recipe->save();
+        
+        //元々の材料と分量を削除
+        $recipe->ingredients;
+        foreach($recipe->ingredients as $ingredient) {
+            $ingredient->delete();
+        }
+        
+        //コレクションインスタンスを生成
+        $ingredients = collect();
+        //$request->ingredientsのingredientとquantityが空でも続ける
+        foreach($request->ingredients as $ingredientAttrs){
+            if (empty($ingredientAttrs['ingredient']) || empty($ingredientAttrs['quantity'])) {
+                continue;
+            }
+            //新しいモデルを保存してインスタンスを返します。
+            $ingredient = $recipe->ingredients()->create($ingredientAttrs);
+            //$ingredientsの最後にアイテム$ingredientを追加
+            $ingredients->push($ingredient);
+          
+        }
+        
+        //元々の作り方を削除
+        $recipe->how_tos;
+        foreach($recipe->how_tos as $how_to) {
+            $how_to->delete();
+        }
+        
+        //コレクションインスタンスを生成
+        $how_tos = collect();
+        //$request->how_tosのhow_to_makeが空でも続ける
+        foreach($request->how_tos as $howToMakeAttrs){
+            if(empty($howToMakeAttrs['how_to_make'])){
+                continue;
+            }
+            //新しいモデルを保存してインスタンスを返します。
+            $how_to_make = $recipe->how_tos()->create($howToMakeAttrs);
+            //$how_tosの最後にアイテム$how_to_makeを追加
+            $how_tos->push($how_to_make);
+           
+        }
         
         return redirect('/');
     }
@@ -126,6 +164,7 @@ class RecipesController extends Controller
             $recipe->delete();
         }
         
-        return back();
+        return redirect('/');
     }
+    
 }

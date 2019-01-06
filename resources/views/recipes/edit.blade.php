@@ -14,6 +14,7 @@
                 <div class="form-group">
                     {!! Form::label('content', 'ひとこと') !!}
                     {!! Form::text('content', null, ['class'=> 'form-control']) !!}
+
                 </div>
             </div>
         </div>
@@ -31,8 +32,21 @@
                                 {!! Form::label('ingredient', '材料・調味料名') !!}
                                 <?php
                                     for($i = 0; $i <= 7; $i++){
+                                        
                                 ?>
+                                
+                            <?php 
+                               if(isset($ingredients[$i])){ // $ingredientsに$iが存在するかを確認している
+                            ?>
+                                {!! Form::text("ingredients[$i][ingredient]", $ingredients[$i]['ingredient'], ['class'=> 'form-control']) !!}
+                            <?php
+                               } else { // $iが存在しない＝内容がからの場合は第二引数をnullにしている
+                            ?>
                                 {!! Form::text("ingredients[$i][ingredient]", null, ['class'=> 'form-control']) !!}
+
+                            <?php
+                               }
+                            ?>
                                 <?php } ?>
                             </div>
                         </div>
@@ -42,7 +56,18 @@
                                 <?php
                                     for($i = 0; $i <= 7; $i++){
                                 ?>
+                                <?php 
+                               if(isset($ingredients[$i])){ // $ingredientsに$iが存在するかを確認している
+                            ?>
+                                {!! Form::text("ingredients[$i][quantity]", $ingredients[$i]['quantity'], ['class'=> 'form-control']) !!}
+                            <?php
+                               } else { // $iが存在しない＝内容がからの場合は第二引数をnullにしている
+                            ?>
                                 {!! Form::text("ingredients[$i][quantity]", null, ['class'=> 'form-control']) !!}
+
+                            <?php
+                               }
+                            ?>
                                 <?php } ?>
                             </div>
                         </div>
@@ -58,9 +83,19 @@
             ?>
             <div class="col-md-3">
                 {!! Form::label('how_to_make', $i+1) !!}
-                {!! Form::textarea("how_to[$i][how_to_make]", null, ['class'=> 'form-control']) !!}
-            </div>
-            <?php } ?>
+                <?php 
+                    if(isset($how_tos[$i])){ // $how_tosに$iが存在するかを確認している
+                ?>
+                    {!! Form::textarea("how_tos[$i][how_to_make]", $how_tos[$i]['how_to_make'], ['class'=> 'form-control']) !!}
+                <?php
+                    } else { // $iが存在しない＝内容がからの場合は第二引数をnullにしている
+                ?>
+                    {!! Form::textarea("how_tos[$i][how_to_make]", null, ['class'=> 'form-control']) !!}
+                <?php
+                    }
+                ?>
+             </div>
+                <?php } ?>
         </div>
     </div>
     <div class="container">

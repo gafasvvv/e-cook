@@ -47,5 +47,10 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/upload', 'ProfileController@upload');
 });
 
+// //料理画像投稿機能
+// Route::group(['middleware'=>'auth'], function(){
+//     Route::post('/uploadcontent', 'UploadContentController@upload');
+// });
+
 //検索機能
 Route::get('/paginate', 'SearchController@index')->name('search.index');

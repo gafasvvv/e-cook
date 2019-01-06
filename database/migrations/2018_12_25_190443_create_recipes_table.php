@@ -18,7 +18,6 @@ class CreateRecipesTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('name');
             $table->string('content');
-            //$table->text('photo_url');
             $table->timestamps();
             
             // 外部キー制約

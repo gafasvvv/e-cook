@@ -13,12 +13,12 @@ class Recipe extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function ingredient()
+    public function ingredients()
     {
         return $this->hasMany(Ingredient::class);
     }
     
-    public function how_to()
+    public function how_tos()
     {
         return $this->hasMany(HowTo::class);
     }
