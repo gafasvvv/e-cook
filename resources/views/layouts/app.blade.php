@@ -16,6 +16,7 @@
             @include('commons.error_messages')
             
             @yield('content')
+            
         </div>
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -23,4 +24,8 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     </body>
+    
+    <footer>
+        <div class="text-center text-muted">&copy; 2019 e-cook</a>
+    </footer>
 </html>

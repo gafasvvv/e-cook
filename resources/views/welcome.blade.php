@@ -2,29 +2,29 @@
 
 @section('content')
     @if (Auth::check())
-    <div class="container">
-        <h1 class="text-center mb-3">お気に入りランキング</h1>
-        <div class="row mb-5 mx-auto">
-            <div class="col-md-4">
-                <h2 class="text-left">No.1</h2>
-                <img src="https://placehold.jp/200x200.png"></img> 
-                <h3 class="text-left">recipe title</h3>
-            </div>
-            <div class="col-md-4">
-                <h2 class="text-left">No.2</h2>
-                <img src="https://placehold.jp/200x200.png"></img>  
-                <h3 class="text-left">recipe title</h3>
-            </div>
-            <div class="col-md-4">
-                <h2 class="text-left">No.3</h2>
-                <img src="https://placehold.jp/200x200.png"></img> 
-                <h3 class="text-left">recipe title</h3>
-            </div>
-        </div>
-    </div>
+    <!--<div class="container">-->
+    <!--    <h1 class="text-center mb-3">お気に入りランキング</h1>-->
+    <!--    <div class="row mb-5 mx-auto">-->
+    <!--        <div class="col-md-4">-->
+    <!--            <h2 class="text-left">No.1</h2>-->
+    <!--            <img src="https://placehold.jp/200x200.png"></img> -->
+    <!--            <h3 class="text-left">recipe title</h3>-->
+    <!--        </div>-->
+    <!--        <div class="col-md-4">-->
+    <!--            <h2 class="text-left">No.2</h2>-->
+    <!--            <img src="https://placehold.jp/200x200.png"></img>  -->
+    <!--            <h3 class="text-left">recipe title</h3>-->
+    <!--        </div>-->
+    <!--        <div class="col-md-4">-->
+    <!--            <h2 class="text-left">No.3</h2>-->
+    <!--            <img src="https://placehold.jp/200x200.png"></img> -->
+    <!--            <h3 class="text-left">recipe title</h3>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
     <div class="container">
         <div class=mb-3>
-        <h1 class="text-center">新着レシピ</h1>
+        <h2 class="text-center">新着レシピ</h2>
         </div>
         @if(count($recipes) > 0)
         <div class="row mb-5">
@@ -32,7 +32,10 @@
             <div class="col-md-3 mb-5">
                 <img src="https://placehold.jp/200x200.png"></img>
                 <h3>{!! link_to_route('recipes.show', $recipe->name, ['id' => $recipe->id]) !!}</h3>
-                <p>投稿者:{!! link_to_route('users.show', $recipe->user->name, ['id' => $recipe->user->id]) !!}</p>
+                <p>ひとこと</p>
+                <h4>{!! nl2br(e($recipe->content)) !!}</h4>
+                <div>投稿者 : {!! link_to_route('users.show', $recipe->user->name, ['id' => $recipe->user->id]) !!}</div>
+                <div>投稿日時 : {{ $recipe->created_at }}</div>
                 <div class="row mt-3 mx-auto">
                 @if (Auth::id() != $recipe->user_id)
                     @if (Auth::id() != $recipe->id)

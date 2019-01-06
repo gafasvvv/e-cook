@@ -25,8 +25,12 @@
         <div class="col-md-3">
             <img src="https://placehold.jp/200x200.png"></img> 
             <h3>{!! link_to_route('recipes.show', $recipe->name, ['id' => $recipe->id]) !!}</h3>
-            <p>投稿者:{!! link_to_route('users.show', $recipe->user->name, ['id' => $recipe->user->id]) !!}</p>
+            <p>コメント</p>
+            <p>{!! nl2br(e($recipe->content)) !!}</p>
+            <div>投稿者 : {!! link_to_route('users.show', $recipe->user->name, ['id' => $recipe->user->id]) !!}</div>
+            <div>投稿日時 : {{ $recipe->created_at }}</div>
             <div class="row mt-3 mb-4 mx-auto">
+            @if (Auth::id() != $recipe->user_id)
                 @if (Auth::id() != $recipe->id)
                     @if (Auth::user()->is_favorite($recipe->id))
                     {!! Form::open(['route' => ['favorites.unfavorite', $recipe->id], 'method' => 'delete']) !!}
@@ -38,6 +42,7 @@
                     {!! Form::close() !!}
                      @endif
                 @endif
+            @endif
             </div>
         </div>
          @endforeach

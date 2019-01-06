@@ -1,6 +1,6 @@
 <header class="mb-4">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark font-weight-bold">
-        <a class="navbar-brand" href="/">e-cook</a>
+    <nav class="navbar navbar-expand-sm navbar-light border-bottom">
+        <a class="navbar-brand font-weight-bold" href="/">e-cook</a>
         
         <botton type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
             <span class="navbar-toggler-icon"></span>

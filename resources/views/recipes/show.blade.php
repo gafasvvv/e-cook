@@ -4,9 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-4 mb-3">
+                <label>レシピ名</label>
                 <h2>{{ $recipe->name }}</h2>
             </div>
             <div class="col-7 offset-1 mb-3">
+                <label>ひとこと</label>
                 <h3>{{ $recipe->content }}</h3>
             </div>
         </div>
@@ -19,17 +21,16 @@
             <div class="col-8 mb-3">
                 <h4>材料(2人分)</h4>
                 <div class="row">
-                    <div class="col-md-8">
-                        
-                        <h4>材料・調味料名</h4>
+                    <div class="col-md-6">
+                        <label>材料・調味料名</label>
                         @foreach ($ingredients as $ingredient)
                         <div>
-                        {{ $ingredient->ingredient }}
+                           {{ $ingredient->ingredient }}
                         </div>
                         @endforeach
                     </div>
-                    <div class="col-md-4">
-                        <h4>分量</h4>
+                    <div class="col-md-6">
+                        <label>分量</label>
                         @foreach ($ingredients as $ingredient)
                         <div>
                             {{ $ingredient->quantity }}
@@ -43,9 +44,9 @@
     <div class="container">
         <h4>作り方</h4>
         @foreach ($how_tos as $how_to)
-        <div>
-       {{ $how_to->how_to_make }}
-       </div>
+        <ul>
+           <li>{{ $how_to->how_to_make }}</li>
+       </ul>
         @endforeach
     </div>
     @if (Auth::id() == $recipe->user_id)

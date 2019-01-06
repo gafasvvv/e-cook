@@ -49,14 +49,15 @@
                 <li class="media mb-3">
                     <div class="media-body ml-3">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-5">
                                 <img src="https://placehold.jp/200x200.png"></img>
-                                <h3>{!! link_to_route('recipes.show', $favorite->name, ['id' => $favorite->id]) !!}</h3>
                             </div>
-                            <div class="col-6">
-                                {!! link_to_route('users.show', $favorite->user->name, ['id' => $favorite->user->id]) !!}
-                                <span class="text-muted">投稿日時 {{ $favorite->created_at }}</span>
-                                <p>{!! nl2br(e($favorite->content)) !!}</p>
+                            <div class="col-7">
+                                <h3>{!! link_to_route('recipes.show',$favorite->name, ['id' => $favorite->id]) !!}</h3>
+                                <p>ひとこと</p>
+                                <h4>{!! nl2br(e($favorite->content)) !!}</h4>
+                                <div>投稿者 : {!! link_to_route('users.show', $favorite->user->name, ['id' => $favorite->user->id]) !!}</div>
+                                <div>投稿日時 : {{ $favorite->created_at }}</div>
                                 <div class="row">
                                     <div class="col-6 mx-auto">
                                     @if (Auth::id() != $favorite->id)
