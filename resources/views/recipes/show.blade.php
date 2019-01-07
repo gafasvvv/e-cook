@@ -16,7 +16,23 @@
     <div class="container">
         <div class="row">
             <div class="col-4 mb-3">
-                <img src="https://placehold.jp/200x200.png"></img>
+                @if ($recipe->photo_url)
+                    <img src="{{ $recipe->photo_url }}" style="width: 300px; height: 300px;">
+                @else
+                    <img src="https://placehold.jp/300x300.png"></img>
+                @endif
+                @if (Auth::id() == $recipe->user_id)
+                {!! Form::open(['route' => ['uploadcontent.upload', $recipe->id], 'method' => 'post', 'class' => 'form', 'files' => true]) !!}
+                <div class="form-group">
+                    {!! Form::label('myfile', 'レシピ画像を追加してください') !!}
+                    {!! Form::file('myfile', null) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::submit('追加') !!}
+                </div>
+                
+                {!! Form::close() !!}
+                @endif
             </div>
             <div class="col-8 mb-3">
                 <h4>材料(2人分)</h4>

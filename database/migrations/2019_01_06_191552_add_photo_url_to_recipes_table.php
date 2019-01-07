@@ -14,7 +14,7 @@ class AddPhotoUrlToRecipesTable extends Migration
     public function up()
     {
         Schema::table('recipes', function (Blueprint $table) {
-            $table->text('photo_url');
+            $table->text('photo_url')->nullable();
         });
     }
 

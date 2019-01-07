@@ -20,58 +20,50 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <img src="https://placehold.jp/200x200.png"></img>
-            </div>
-            <div class="col-8">
-                <h3>材料(2人分)</h3>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                {!! Form::label('ingredient', '材料・調味料名') !!}
-                                <?php
-                                    for($i = 0; $i <= 7; $i++){
-                                        
-                                ?>
-                                
-                            <?php 
-                               if(isset($ingredients[$i])){ // $ingredientsに$iが存在するかを確認している
+        <h3>材料(2人分)</h3>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                           {!! Form::label('ingredient', '材料・調味料名') !!}
+                        <?php
+                            for($i = 0; $i <= 7; $i++){
+                                    
                             ?>
-                                {!! Form::text("ingredients[$i][ingredient]", $ingredients[$i]['ingredient'], ['class'=> 'form-control']) !!}
-                            <?php
-                               } else { // $iが存在しない＝内容がからの場合は第二引数をnullにしている
-                            ?>
-                                {!! Form::text("ingredients[$i][ingredient]", null, ['class'=> 'form-control']) !!}
-
-                            <?php
-                               }
-                            ?>
-                                <?php } ?>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('quantity', '分量') !!}
-                                <?php
-                                    for($i = 0; $i <= 7; $i++){
-                                ?>
-                                <?php 
-                               if(isset($ingredients[$i])){ // $ingredientsに$iが存在するかを確認している
-                            ?>
-                                {!! Form::text("ingredients[$i][quantity]", $ingredients[$i]['quantity'], ['class'=> 'form-control']) !!}
-                            <?php
-                               } else { // $iが存在しない＝内容がからの場合は第二引数をnullにしている
-                            ?>
-                                {!! Form::text("ingredients[$i][quantity]", null, ['class'=> 'form-control']) !!}
-
-                            <?php
-                               }
-                            ?>
-                                <?php } ?>
-                            </div>
+                            
+                        <?php 
+                           if(isset($ingredients[$i])){ // $ingredientsに$iが存在するかを確認している
+                        ?>
+                            {!! Form::text("ingredients[$i][ingredient]", $ingredients[$i]['ingredient'], ['class'=> 'form-control']) !!}
+                        <?php
+                           } else { // $iが存在しない＝内容がからの場合は第二引数をnullにしている
+                        ?>
+                            {!! Form::text("ingredients[$i][ingredient]", null, ['class'=> 'form-control']) !!}
+                        <?php
+                           }
+                        ?>
+                            <?php } ?>
                         </div>
                     </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {!! Form::label('quantity', '分量') !!}
+                    <?php
+                        for($i = 0; $i <= 7; $i++){
+                    ?>
+                    <?php 
+                        if(isset($ingredients[$i])){ // $ingredientsに$iが存在するかを確認している
+                    ?>
+                        {!! Form::text("ingredients[$i][quantity]", $ingredients[$i]['quantity'], ['class'=> 'form-control']) !!}
+                    <?php
+                        } else { // $iが存在しない＝内容がからの場合は第二引数をnullにしている
+                    ?>
+                        {!! Form::text("ingredients[$i][quantity]", null, ['class'=> 'form-control']) !!}
+
+                    <?php
+                        }
+                    ?>
+                        <?php } ?>
+                </div>
             </div>
         </div>
     </div>

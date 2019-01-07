@@ -4,35 +4,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-3">
-                <!--<img src="https://placehold.jp/200x200.png"></img>-->
-                <div class="form-group mt-3">
-                        {{--@if (session('s3url'))--}}
-                        {{--    <h2>料理写真</h2>--}}
-                        {{--    <img src="{{ session('s3url') }}">--}}
-                        {{--@endif-->
-                            <h2>料理写真</h2>
-                        {{--{!! Form::open(['url' => '/uploadcontent', 'method' => 'post', 'class' => 'form', 'files' => true]) !!}--}}
-                            {!! Form::open(['route' => 'recipes.store', 'class' => 'form', 'files' => true]) !!}
-                        <div class="form-group">
-                        {!! Form::label('myfile', 'レシピ画像追加') !!}
-                        {!! Form::file('myfile', null) !!}
-                        </div>
-                        
-                        {{--<div class="form-group">}--}}
-                        {{--{!! Form::submit('アップロード') !!}--}}
-                        {{--</div>}--}}
-                        
-                        {{--{!! Form::close() !!}--}}
-                        
-                </div>
-            </div>
-
-            <div class="col-md-6 offset-md-2">
-                {{--{!! Form::open(['route' => 'recipes.store']) !!}}--}}
+                {!! Form::open(['route' => 'recipes.store']) !!}
                 <div class="form-group">
                     {!! Form::label('name', 'レシピ名') !!}
                     {!! Form::text('name', null, ['class'=> 'form-control']) !!}
-                
+                </div>
+            </div>
+            <div class="col-md-6 offset-md-2">
+                <div class="form-group">
                     {!! Form::label('content', 'ひとこと') !!}
                     {!! Form::text('content', null, ['class'=> 'form-control']) !!}
                 </div>

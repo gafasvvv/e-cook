@@ -10,12 +10,12 @@
             <input type="submit" value="検索">
             </form>
         </div>
-        <div class="col-md-3 offset-1 mb-4">
-            <form>
-            <input type="text" name="ingredient" value="{{ $ingredient }}" placeholder="材料名で検索">
-            <input type="submit" value="検索">
-            </form>
-        </div>
+        <!--<div class="col-md-3 offset-1 mb-4">-->
+        <!--    <form>-->
+        <!--    <input type="text" name="ingredient" value="{{ $ingredient }}" placeholder="材料名で検索">-->
+        <!--    <input type="submit" value="検索">-->
+        <!--    </form>-->
+        <!--</div>-->
     </div>
 </div>
 <div class="container">
@@ -23,7 +23,11 @@
     <div class="row">
         @foreach($recipes as $recipe)
         <div class="col-md-3">
-            <img src="https://placehold.jp/200x200.png"></img> 
+            @if ($recipe->photo_url)
+                <img src="{{ $recipe->photo_url }}" style="width: 300px; height: 300px;">
+            @else
+                <img src="https://placehold.jp/300x300.png"></img>
+            @endif
             <h3>{!! link_to_route('recipes.show', $recipe->name, ['id' => $recipe->id]) !!}</h3>
             <p>コメント</p>
             <p>{!! nl2br(e($recipe->content)) !!}</p>

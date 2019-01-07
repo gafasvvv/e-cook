@@ -4,7 +4,12 @@
             <div class="media-body ml-3">
                 <div class="row">
                     <div class="col-6">
-                        <img src="https://placehold.jp/200x200.png"></img>
+                        {{dd($favorite)}}
+                        @if ($favorite->recipes->photo_url)
+                            <img src="{{ $favorite->recipes->photo_url }}">
+                        @else
+                            <img src="https://placehold.jp/200x200.png"></img>
+                        @endif
                         <h3>{!! link_to_route('recipes.show', $favorite->name, ['id' => $favorite->id]) !!}</h3>
                     </div>
                     <div class="col-6">

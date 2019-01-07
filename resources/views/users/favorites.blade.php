@@ -49,10 +49,14 @@
                 <li class="media mb-3">
                     <div class="media-body ml-3">
                         <div class="row">
-                            <div class="col-5">
-                                <img src="https://placehold.jp/200x200.png"></img>
+                            <div class="col-6">
+                                @if ($favorite->photo_url)
+                                    <img src="{{ $favorite->photo_url }}" style="width: 300px; height: 300px;">
+                                @else
+                                    <img src="https://placehold.jp/300x300.png"></img>
+                                @endif
                             </div>
-                            <div class="col-7">
+                            <div class="col-6">
                                 <h3>{!! link_to_route('recipes.show',$favorite->name, ['id' => $favorite->id]) !!}</h3>
                                 <p>ひとこと</p>
                                 <h4>{!! nl2br(e($favorite->content)) !!}</h4>

@@ -30,7 +30,11 @@
         <div class="row mb-5">
             @foreach($recipes as $recipe)
             <div class="col-md-3 mb-5">
-                <img src="https://placehold.jp/200x200.png"></img>
+                @if ($recipe->photo_url)
+                    <img src="{{ $recipe->photo_url }}" style="width: 300px; height: 300px;">
+                @else
+                    <img src="https://placehold.jp/200x200.png"></img>
+                @endif
                 <h3>{!! link_to_route('recipes.show', $recipe->name, ['id' => $recipe->id]) !!}</h3>
                 <p>ひとこと</p>
                 <h4>{!! nl2br(e($recipe->content)) !!}</h4>
@@ -67,7 +71,7 @@
             @foreach($recipes as $recipe)
             <div class="col-md-3 mb-5 mx-auto">
                 <h3>{!! link_to_route('recipes.show', $recipe->name, ['id' => $recipe->id]) !!}</h3>
-                <img src="https://placehold.jp/200x200.png"></img>
+                <img src="https://placehold.jp/300x300.png"></img>
             </div>
             @endforeach
         </div>
