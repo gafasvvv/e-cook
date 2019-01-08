@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\Recipe;
 
 
@@ -10,25 +12,28 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $recipe = new Recipe();
+        //キーワードを取得
+        $keyword = $request->input('keyword');
         
-        if($request->has('name')){
-            $recipe = $recipe
-                    ->orWhere('name', 'LIKE', '%'.$request->input('name').'%');
+        //もしキーワードが入力されていれば
+        if(!empty($keyword))
+        {
+            $recipes = DB::table('recipes')
+                    ->where('name', 'like', '%'.$keyword.'%')
+                    ->paginate(4);
+            
+            $recipes = Recipe::whereHas('ingredients', function ($query) use ($keyword){
+                $query->where('ingredient', 'like','%'.$keyword.'%');
+            })->paginate(4);
+            
+        }else{
+            $recipes = DB::table('recipes')->paginate(4);
         }
         
-        // if($request->has('ingredient')){
-        //     $recipe = $recipe
-        //             ->join('ingredients','recipes.id', '=', 'ingredients.recipe_id')
-        //             ->orWhere('ingredient', 'LIKE', '%'.$request->input('ingredient').'%');
-        // }
-        
-        $pagedRecipes = $recipe->paginate(8)
-                        ->appends($request->only(['name', 'ingredient']));
-                        
-        return view('search/index')
-                ->with('name', $request->input('name'))
-                ->with('ingredient', $request->input('ingredient'))
-                ->with('recipes', $pagedRecipes);
+        // dd($query);
+        return view('search.index',[
+            'recipes' => $recipes,
+            'keyword' => $keyword,
+            ]);
     }
 }

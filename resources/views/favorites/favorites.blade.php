@@ -4,18 +4,18 @@
             <div class="media-body ml-3">
                 <div class="row">
                     <div class="col-6">
-                        {{dd($favorite)}}
-                        @if ($favorite->recipes->photo_url)
-                            <img src="{{ $favorite->recipes->photo_url }}">
+                        @if ($favorite->photo_url)
+                            <img src="{{ $favorite->photo_url }}" style="width: 250px; height: 250px;">
                         @else
-                            <img src="https://placehold.jp/200x200.png"></img>
+                            <img src="https://placehold.jp/250x250.png"></img>
                         @endif
-                        <h3>{!! link_to_route('recipes.show', $favorite->name, ['id' => $favorite->id]) !!}</h3>
                     </div>
                     <div class="col-6">
-                        {!! link_to_route('users.show', $favorite->user->name, ['id' => $favorite->user->id]) !!}
-                        <span class="text-muted">投稿日時 {{ $favorite->created_at }}</span>
-                        <p>{!! nl2br(e($favorite->content)) !!}</p>
+                        <h3>{!! link_to_route('recipes.show',$favorite->name, ['id' => $favorite->id]) !!}</h3>
+                        <p>ひとこと</p>
+                        <h4>{!! nl2br(e($favorite->content)) !!}</h4>
+                        <div>投稿者 : {!! link_to_route('users.show', $favorite->user->name, ['id' => $favorite->user->id]) !!}</div>
+                        <div>投稿日時 : {{ $favorite->created_at }}</div>
                         <div class="row">
                             <div class="col-6 mx-auto">
                             @if (Auth::id() != $favorite->id)

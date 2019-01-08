@@ -5,9 +5,9 @@
                 <div class="row">
                     <div class="col-6">
                         @if ($recipe->photo_url)
-                            <img src="{{ $recipe->photo_url }}" style="width: 300px; height: 300px;">
+                            <img src="{{ $recipe->photo_url }}" style="width: 250px; height: 250px;">
                         @else
-                            <img src="https://placehold.jp/300x300.png"></img>
+                            <img src="https://placehold.jp/250x250.png"></img>
                         @endif
                     </div>
                     <div class="col-6">
