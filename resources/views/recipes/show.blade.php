@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-4 mb-3">
+            <div class="col-md-4 mb-3">
                 <label>レシピ名</label>
                 <h2>{{ $recipe->name }}</h2>
             </div>
-            <div class="col-7 offset-1 mb-3">
+            <div class="col-md-7 offset-md-1 mb-3">
                 <label>ひとこと</label>
                 <h3>{{ $recipe->content }}</h3>
             </div>
@@ -15,7 +15,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-4 mb-3">
+            <div class="col-md-4 mb-3">
                 @if ($recipe->photo_url)
                     <img src="{{ $recipe->photo_url }}" style="width: 300px; height: 300px;">
                 @else
@@ -34,19 +34,19 @@
                 {!! Form::close() !!}
                 @endif
             </div>
-            <div class="col-8 mb-3">
+            <div class="col-md-8 mb-3">
                 <h4>材料(2人分)</h4>
                 <div class="row">
-                    <div class="col-md-6">
-                        <label>材料・調味料名</label>
+                    <div class="col-6">
+                        <h4>材料・調味料名</h4>
                         @foreach ($ingredients as $ingredient)
                         <div>
                            {{ $ingredient->ingredient }}
                         </div>
                         @endforeach
                     </div>
-                    <div class="col-md-6">
-                        <label>分量</label>
+                    <div class="col-6">
+                        <h4>分量</h4>
                         @foreach ($ingredients as $ingredient)
                         <div>
                             {{ $ingredient->quantity }}
