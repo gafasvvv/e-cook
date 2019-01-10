@@ -53,4 +53,11 @@ Route::group(['middleware'=>'auth'], function(){
 });
 
 //検索機能
-Route::get('paginate', 'SearchController@index')->name('search.index');
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('paginate', 'SearchController@index')->name('search.index');
+});
+
+//お気に入りランキング機能
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('favoriteranking', 'FavoriteRankingController@index')->name('favoriteranking.index');
+});

@@ -18,7 +18,7 @@
                     <div class="form-group">
                         @if ($user->avatar_filename)
                         <p class="text-center">
-                            <img src="{{ asset('storage/avatar/' . $user->avatar_filename) }}" alt="avatar" />
+                            <img src="{{ asset('storage/avatar/' . $user->avatar_filename) }}" alt="avatar"  class="rounded"/>
                         </p>
                         @else
                         <img class="media-object rounded img-fluid" src="{{ Gravatar::src($user->email, 500) }}" alt="">
@@ -31,7 +31,6 @@
                         {!! Form::submit('アップロード' , ['class' => 'btn btn-outline-primary']) !!}
                     </div>
                     {!! Form::close() !!}
-                    {{--<img class="media-object rounded img-fluid" src="{{ Gravatar::src($user->email, 500) }}" alt="">--}}
                 </div>
             </div>
         </aside>

@@ -18,10 +18,10 @@
                     <div class="form-group">
                         @if ($user->avatar_filename)
                         <p class="text-center">
-                            <img src="{{ asset('storage/avatar/' . $user->avatar_filename) }}" alt="avatar" />
+                            <img src="{{ asset('storage/avatar/' . $user->avatar_filename) }}" alt="avatar"  class="rounded"/>
                         </p>
                         @else
-                        <img class="media-object rounded img-fluid" src="{{ Gravatar::src($user->email, 500) }}" alt="">
+                        <img class="media-object rounded img-fluid" src="{{ Gravatar::src($user->email, 500) }}" alt=""  class="rounded">
                         @endif
                         {!! Form::label('file', '推奨サイズ200px*200px' , ['class' => 'control-labelse']) !!}
                         {!! Form::file('file') !!}

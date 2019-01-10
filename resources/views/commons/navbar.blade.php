@@ -1,5 +1,5 @@
 <header class="mb-4">
-    <nav class="navbar navbar-expand-sm navbar-light border-bottom">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
         <a class="navbar-brand font-weight-bold" href="/">e-cook</a>
         
         <botton type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
@@ -12,6 +12,7 @@
                 @if(Auth::check())
                 <li class="nav-item">{!! link_to_route('users.show', 'マイページ', ['id' => Auth::id()], ['class' => 'nav-link']) !!}</li>
                 <li class="nav-item">{!! link_to_route('recipes.create', '新規投稿', [], ['class' => 'nav-link']) !!}</li>
+                <li class="nav-item">{!! link_to_route('favoriteranking.index', 'ランキング', [], ['class' => 'nav-link']) !!}</li>
                 <li class="nav-item">{!! link_to_route('search.index', '検索ページ', [], ['class' => 'nav-link']) !!}</li>
                 <li class="nav-item">{!! link_to_route('logout.get', 'ログアウト', [], ['class' => 'nav-link']) !!}</li>
                 @else

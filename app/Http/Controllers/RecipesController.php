@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Recipe;
 use App\User;
@@ -12,12 +13,21 @@ class RecipesController extends Controller
     //getでrecipes/にアクセスされた場合の「一覧表示処理」
     public function index()
     {
-        $recipes = Recipe::paginate(16);
+        $recipes = Recipe::paginate(8);
         $user = new User;
-    
+        
+        $rankings = DB::table('user_recipe')
+                    ->join('recipes', 'user_recipe.recipe_id', '=', 'recipes.id')
+                    ->select(['user_recipe.recipe_id', 'recipes.name', 'recipes.content', 'recipes.photo_url', DB::raw('count(*) as count')])
+                    ->groupBy('user_recipe.recipe_id', 'recipes.name', 'recipes.content', 'recipes.photo_url')
+                    ->orderBy('count','user_recipe.recipe_id', 'recipes.name', 'recipes.content', 'recipes.photo_url', 'DESC')
+                    ->take(3)
+                    ->get();
+        
         return view('welcome', [
             'recipes' => $recipes,
             'user' => $user,
+            'rankings' => $rankings,
         ]);
     }
     

@@ -14,26 +14,23 @@
             </div>
         </div>
     </div
-         {{--{{ dump($datas) }} --}}
     @if (Auth::check())
     <div class="container">
-        <div class=mb-3>
-        <h2 class="text-center">新着レシピ</h2>
+        <div class="mt-3 mb-3">
+            <h2 class="text-center text-secondary">検索結果</h2>
         </div>
         @if(count($recipes) > 0)
-        <div class="row mb-5">
+        <div class="row mb-3 bg-light rounded">
             @foreach($recipes as $recipe)
-            <div class="col-md-3 mb-5">
+            <div class="col-md-3 mt-3 mb-3 text-center">
                 @if ($recipe->photo_url)
-                    <img src="{{ $recipe->photo_url }}" style="width: 250px; height: 250px;">
+                    <img src="{{ $recipe->photo_url }}" style="width: 250px; height: 250px;" class="rounded">
                 @else
-                    <img src="https://placehold.jp/250x250.png"></img>
+                    <img src="https://placehold.jp/250x250.png" class="rounded"></img>
                 @endif
-                <h3>{!! link_to_route('recipes.show', $recipe->name, ['id' => $recipe->id]) !!}</h3>
-                <p>ひとこと</p>
-                <p>{!! nl2br(e($recipe->content)) !!}</p>
-                <!--<div>投稿日時 : {{ $recipe->created_at }}</div>-->
-                <div class="row mt-3 mx-auto">
+                <h3 class="mt-3">{!! link_to_route('recipes.show', $recipe->name, ['id' => $recipe->id]) !!}</h3>
+                <h4 class="mt-2">{!! nl2br(e($recipe->content)) !!}</h4>
+                <div class="row mt-3 mx-auto d-block">
                 @if (Auth::id() != $recipe->user_id)
                     @if (Auth::id() != $recipe->id)
                         @if (Auth::user()->is_favorite($recipe->id))
@@ -52,11 +49,7 @@
             @endforeach
         </div>
         @endif
+        {{ $recipes->render('pagination::bootstrap-4') }}
     </div>
     @endif
-    <div class="col-sm-8" style="text-align:right;">
-        <div class="paginate">
-            {!! $recipes->appends(['keyword' => $keyword])->render() !!}
-        </div>
-    </div>
 @endsection
