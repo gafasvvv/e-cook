@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <link rel="icon" type="image/x-icon" href="./favicon.ico">
-        <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180x180.png">　
+        <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180x180.png">
     </head>
     
     <body>

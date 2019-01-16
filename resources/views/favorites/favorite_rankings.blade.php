@@ -5,7 +5,7 @@
     @if (Auth::check())
     <div class="container">
         <div class="mt-3 mb-3">
-            <h2 class="text-center text-success">お気に入りランキング</h2>
+            <h2 class="text-center text-danger">お気に入りランキング</h2>
         </div>
         <div class="row bg-light mb-5 rounded">
             @foreach($rankings as $ranking)

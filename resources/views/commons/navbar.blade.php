@@ -1,5 +1,5 @@
 <header class="mb-4">
-    <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-warning border-bottom">
         <a class="navbar-brand font-weight-bold" href="/">e-cook</a>
         
         <botton type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
