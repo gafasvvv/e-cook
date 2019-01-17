@@ -8,7 +8,8 @@
                     <h3 class="card-title text-center">{{ $user->name }}</h3>
                 </div>
                 <div class="card-body">
-                    {!! Form::open(['url' => '/upload', 'method' => 'post', 'files' => true]) !!}
+                    @if (Auth::id() == $user->id)
+                    {!! Form::open(['route' => ['profile.upload',$user->id], 'method' => 'post', 'class' => 'form', 'files' => true]) !!}
                     {{--成功メッセージ--}}
                     @if(session('success'))
                     <div class="alert alert-success">
@@ -16,12 +17,12 @@
                     </div>
                     @endif
                     <div class="form-group">
-                        @if ($user->avatar_filename)
+                        @if ($user->avatar_url)
                         <p class="text-center">
-                            <img src="{{ asset('storage/avatar/' . $user->avatar_filename) }}" alt="avatar"  class="rounded"/>
+                            <img src="{{ $user->avatar_url }}" style="width: 300px; height: 300px;">
                         </p>
                         @else
-                        <img class="media-object rounded img-fluid" src="{{ Gravatar::src($user->email, 500) }}" alt=""  class="rounded">
+                            <img class="media-object rounded img-fluid" src="{{ Gravatar::src($user->email, 500) }}" alt="">
                         @endif
                         {!! Form::label('file', '推奨サイズ200px*200px' , ['class' => 'control-labelse']) !!}
                         {!! Form::file('file') !!}
@@ -31,7 +32,7 @@
                         {!! Form::submit('アップロード' , ['class' => 'btn btn-outline-primary']) !!}
                     </div>
                     {!! Form::close() !!}
-                </div>
+                    @endif       </div>
             </div>
         </aside>
         <div class="col-md-8">
