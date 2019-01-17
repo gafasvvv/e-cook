@@ -12,7 +12,7 @@
             </div>
             <div class="col-6 offset-3">
                 <div class="form-group">
-                    {!! Form::label('content', 'ひとこと') !!}
+                    {!! Form::label('content', 'おすすめポイント') !!}
                     {!! Form::text('content', null, ['class'=> 'form-control']) !!}
 
                 </div>

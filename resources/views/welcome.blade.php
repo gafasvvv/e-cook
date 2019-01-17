@@ -5,7 +5,7 @@
     @if (Auth::check())
     <div class="container">
         <div class="mt-3 mb-3">
-            <h2 class="text-center text-danger font-weight-bold">お気に入りBEST3</h2>
+            <h2 class="text-center text-danger">お気に入りBEST3</h2>
         </div>
         <div class="row bg-light mb-5 rounded">
             @foreach($rankings as $ranking)
@@ -26,7 +26,7 @@
     </div>
     <div class="container">
         <div class="mt-3 mb-3">
-            <h2 class="text-center text-secondary font-weight-bold">新着レシピ</h2>
+            <h2 class="text-center text-secondary">新着レシピ</h2>
         </div>
         @if(count($recipes) > 0)
         <div class="row mb-3 bg-light rounded">
@@ -67,7 +67,7 @@
     
     <div class="container">
         <div class="mt-3 mb-3">
-            <h2 class="text-center text-danger font-weight-bold">お気に入りBEST3</h2>
+            <h2 class="text-center text-danger">お気に入りBEST3</h2>
         </div>
         <div class="row bg-light mb-5 rounded">
             @foreach($rankings as $ranking)
@@ -88,7 +88,7 @@
     </div>
     <div class="container">
         <div class="mt-3 mb-3">
-            <h2 class="text-center text-secondary font-weight-bold">新着レシピ</h2>
+            <h2 class="text-center text-secondary">新着レシピ</h2>
         </div>
         @if(count($recipes) > 0)
         <div class="row mb-3 bg-light rounded">

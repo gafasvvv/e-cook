@@ -13,7 +13,7 @@ class UploadContentController extends Controller
     /**
      * 料理画像ファイルのアップロード処理
      */
-    public function upload(Request $request ,$id)
+    public function upload(Request $request, $id)
     {
         $this->validate($request, [
             'myfile' => [
@@ -29,7 +29,7 @@ class UploadContentController extends Controller
                 'dimensions:min_width=120,min_height=120,max_width=1350,max_height=1350',
             ]
         ]);
-
+        
         $image = $request->file('myfile');
         /**
          * 自動生成されたファイル名が付与されてS3に保存される。
@@ -43,8 +43,7 @@ class UploadContentController extends Controller
         $recipe->photo_url = $url;
         $recipe->save();
 
-        return redirect()
-                ->back()
+        return back()
                 ->with('s3url', $url);
     }
 }

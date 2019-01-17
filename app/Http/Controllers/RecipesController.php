@@ -16,6 +16,7 @@ class RecipesController extends Controller
         $recipes = Recipe::paginate(8);
         $user = new User;
         
+        //お気に入りランキング
         $rankings = DB::table('user_recipe')
                     ->join('recipes', 'user_recipe.recipe_id', '=', 'recipes.id')
                     ->select(['user_recipe.recipe_id', 'recipes.name', 'recipes.content', 'recipes.photo_url', DB::raw('count(*) as count')])
@@ -53,11 +54,13 @@ class RecipesController extends Controller
         //      'how_to_make' => 'required|max:191',
         ]);
         
+        //名前とおすすめポイントを追加
         $recipe = $request->user()->recipes()->create([
             'name' => $request->name,
             'content' => $request->content,
         ]);
         
+        //材料名と分量を追加
         $ingredients = collect();
         foreach ($request ->ingredients as $ingredientAttrs) {
           if (empty($ingredientAttrs['ingredient']) || empty($ingredientAttrs['quantity'])) {
@@ -70,6 +73,7 @@ class RecipesController extends Controller
           
         }
         
+        //作り方を追加
         $how_tos = collect();
         
         foreach($request->how_tos as $howToMakeAttrs){
@@ -176,7 +180,7 @@ class RecipesController extends Controller
             $recipe->delete();
         }
         
-        return back();
+        return redirect('/');
     }
     
 }

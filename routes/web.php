@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 //プロフィール画像投稿機能
 Route::group(['middleware'=>'auth'], function(){
-    Route::post('upload', 'ProfileController@upload');
+    Route::post('upload/{id}', 'ProfileController@upload')->name('profile.upload');
 });
 
 //料理画像投稿機能

@@ -8,7 +8,7 @@
                 <h2>{{ $recipe->name }}</h2>
             </div>
             <div class="col-md-7 offset-md-1 mb-3">
-                <label>ひとこと</label>
+                <label>おすすめポイント</label>
                 <h3>{{ $recipe->content }}</h3>
             </div>
         </div>
@@ -21,18 +21,18 @@
                 @else
                     <img src="https://placehold.jp/300x300.png"></img>
                 @endif
-                {{--@if (Auth::id() == $recipe->user_id)--}}
-                {{--{!! Form::open(['route' => ['uploadcontent.upload', $recipe->id], 'method' => 'post', 'class' => 'form', 'files' => true]) !!}--}}
-                <!--<div class="form-group">-->
-                    {{--{!! Form::label('myfile', 'レシピ画像を追加してください') !!}--}}
-                    {{--{!! Form::file('myfile', null) !!}--}}
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    {{--{!! Form::submit('追加') !!}--}}
-                <!--</div>-->
+                @if (Auth::id() == $recipe->user_id)
+                {!! Form::open(['route' => ['uploadcontent.upload', $recipe->id], 'method' => 'post', 'class' => 'form', 'files' => true]) !!}
+                <div class="form-group">
+                    {!! Form::label('myfile', 'レシピ画像を追加してください') !!}
+                    {!! Form::file('myfile', null) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::submit('追加') !!}
+                </div>
                 
-                {{--{!! Form::close() !!}--}}
-                {{--@endif--}}
+                {!! Form::close() !!}
+                @endif
             </div>
             <div class="col-md-8 mb-3">
                 <h4>材料(2人分)</h4>
