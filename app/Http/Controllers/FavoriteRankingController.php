@@ -21,7 +21,7 @@ class FavoriteRankingController extends Controller
                     ->groupBy('user_recipe.recipe_id', 'recipes.name', 'recipes.content', 'recipes.photo_url')
                     ->orderBy('count','user_recipe.recipe_id', 'recipes.name', 'recipes.content', 'recipes.photo_url', 'DESC')
                     ->take(10)
-                    ->paginate(8);
+                    ->paginate(9);
        
         return view('favorites.favorite_rankings',[
             'rankings' => $rankings,
