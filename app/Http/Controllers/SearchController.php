@@ -23,12 +23,12 @@ class SearchController extends Controller
                     ->where('name', 'like', '%'.$keyword.'%')
                     ->paginate(4);
                     
-        }elseif(!empty($keyword)){ 
+        // }elseif(!empty($keyword)){ 
                     
-            //材料名から検索
-            $recipes = Recipe::whereHas('ingredients', function ($query) use ($keyword){
-                $query->where('ingredient', 'like','%'.$keyword.'%');
-            })->paginate(4);
+        //     //材料名から検索
+        //     $recipes = Recipe::whereHas('ingredients', function ($query) use ($keyword){
+        //         $query->where('ingredient', 'like','%'.$keyword.'%');
+        //     })->paginate(4);
             
         }else{
             //キーワードが入力されていない場合

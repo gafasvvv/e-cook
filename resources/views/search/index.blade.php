@@ -7,7 +7,8 @@
             <div class="col-md-3 mb-4">   
                 <form class="form-inline">
                     <div class="form-group">
-                    <input type="text" name="keyword" value="{{ $keyword }}" class="form-control" placeholder="料理名か材料名を入力">
+                    <input type="text" name="keyword" value="{{ $keyword }}" class="form-control"
+                    placeholder="料理名を入力">
                     <input type="submit" value="検索" class="btn btn-outline-info ml-3">
                     </div>
                 </form>
