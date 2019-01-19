@@ -4,15 +4,15 @@
 
     <div class="container">
        <div class="row">
-            <div class="col-md-3 mb-4">   
-                <form class="form-inline">
-                    <div class="form-group">
-                    <input type="text" name="keyword" value="{{ $keyword }}" class="form-control"
-                    placeholder="料理名を入力">
-                    <input type="submit" value="検索" class="btn btn-outline-info ml-3">
-                    </div>
-                </form>
-            </div>
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" name="name" value="{{ $name }}" class="form-control"
+                    placeholder="料理名">または
+                    <input type="text" name="ingredient" value="{{ $ingredient }}" class="form-control"
+                    placeholder="材料名を入力">
+                </div>
+                <input type="submit" value="検索" class="btn btn-outline-info ml-3">
+            </form>
         </div>
     </div
     @if (Auth::check())

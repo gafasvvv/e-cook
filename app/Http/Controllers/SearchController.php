@@ -13,31 +13,33 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         //キーワードを取得
-        $keyword = $request->input('keyword');
+        $name = $request->input('name');
+        $ingredient = $request->input('ingredient');
         
         //もしキーワードが入力されている場合
-        if(!empty($keyword))
+        if(!empty($name))
         {   
             //料理名から検索
             $recipes = DB::table('recipes')
-                    ->where('name', 'like', '%'.$keyword.'%')
+                    ->where('name', 'like', '%'.$name.'%')
                     ->paginate(4);
                     
-        // }elseif(!empty($keyword)){ 
+        }elseif(!empty($ingredient)){ 
                     
-        //     //材料名から検索
-        //     $recipes = Recipe::whereHas('ingredients', function ($query) use ($keyword){
-        //         $query->where('ingredient', 'like','%'.$keyword.'%');
-        //     })->paginate(4);
+            //材料名から検索
+            $recipes = Recipe::whereHas('ingredients', function ($query) use ($ingredient){
+                $query->where('ingredient', 'like','%'.$ingredient.'%');
+            })->paginate(4);
             
         }else{
             //キーワードが入力されていない場合
             $recipes = DB::table('recipes')->paginate(4);
         }
-        // dd($recipes);
+        
         return view('search.index',[
             'recipes' => $recipes,
-            'keyword' => $keyword,
+            'name' => $name,
+            'ingredient' => $ingredient
             ]);
     }
 }
